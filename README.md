@@ -1,2 +1,2 @@
 # odin-library
-Odin Project JS Track library assignment
+Work for the Odin Project JS Track library assignment!
