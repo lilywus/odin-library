@@ -10,6 +10,34 @@ body h1 {
     color: rgb(255, 254, 230);
 }
 
+::backdrop {
+    background: rgb(34,193,195);
+    background: linear-gradient(45deg, 
+        rgba(34,193,195,1) 0%, 
+        rgba(255,187,41,1) 100%);
+    opacity: 0.75;
+}
+
+#dialog {
+    border: none;
+    margin-top: 30vh;
+    padding: 40px;
+}
+
+#dialog h3 {
+    margin-top: 0;
+}
+
+#dialog ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#dialog li {
+    margin: 10px 0;
+}
+
 #container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
