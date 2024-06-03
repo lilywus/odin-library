@@ -87,6 +87,11 @@ const pageField = document.querySelector("#pages");
 const readField = document.querySelector("#read");
 
 addButton.addEventListener("click", () => {
+    // clear form contents when opened
+    const form = document.querySelector("form");
+    form.reset();
+
+    // show form
     dialog.showModal();
 });
 
