@@ -19,9 +19,15 @@ function displayBooks() {
         const bookCard = document.createElement("div");
         bookCard.classList.add("card");
 
+        const deleteBook = document.createElement("button");
+        deleteBook.classList.add("deleteBook");
+        deleteBook.textContent = "x";
+        bookCard.appendChild(deleteBook);
+
         const bookInfo = document.createElement("ul");
 
         const title = document.createElement("li");
+        title.classList.add("displayTitle");
         title.innerHTML = (book.title);
         bookInfo.appendChild(title);
 
@@ -34,15 +40,27 @@ function displayBooks() {
         bookInfo.appendChild(pages);
 
         const read = document.createElement("li");
-        let readText;
-        if (book.read == true) readText = "Yes";
-        else readText = "No";
-        read.innerHTML = ("<b>Read:</b> " + readText);
+        const readButton = document.createElement("button");
+        readButton.classList.add("read");
+        if (book.read == true) {
+            readButton.innerText = "Read";
+            readButton.classList.add("haveread");
+        }
+        else {
+            readButton.innerText = "Not read";
+            readButton.classList.add("notread");
+        }
+
+        read.appendChild(readButton);
         bookInfo.appendChild(read);
 
         bookCard.appendChild(bookInfo);
         libraryContainer.appendChild(bookCard);
-    }}
+    }
+
+    updateClose();
+    updateRead();
+}
 
 function addBook(book) {
     myLibrary.push(book);
@@ -94,3 +112,35 @@ closeButton.addEventListener("click", (e) => {
   e.preventDefault();
   dialog.close();
 });
+
+function updateClose() {
+    const closeButtons = document.querySelectorAll(".deleteBook");
+    const titleDisplays = document.querySelectorAll(".displayTitle");
+
+    for (let i = 0; i < closeButtons.length; i++) {
+        closeButtons[i].addEventListener("click", function (e) {
+            for (let j = 0; j < myLibrary.length; j++) {
+                if (myLibrary[j].title == titleDisplays[i].textContent) {
+                    myLibrary.splice(j, 1);
+                    displayBooks();
+                }
+            }
+        });
+    }
+}
+
+function updateRead() {
+    const readButtons = document.querySelectorAll(".read");
+    const titleDisplays = document.querySelectorAll(".displayTitle");
+    
+    for (let i = 0; i < readButtons.length; i++) {
+    readButtons[i].addEventListener("click", function (e) {
+        for (let j = 0; j < myLibrary.length; j++) {
+            if (myLibrary[j].title == titleDisplays[i].textContent) {
+                myLibrary[j].read = !myLibrary[j].read;
+                displayBooks();
+            }
+        }
+    });
+    }
+}
